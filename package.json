@@ -1,0 +1,88 @@
+{
+  "name": "wuzh",
+  "version": "0.0.0",
+  "private": true,
+  "main": "electron/main.js",
+  "author": "wuzh",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "start": "concurrently vite \"electron .\"",
+    "stop": "taskkill /F /IM node.exe /T",
+    "electron:build": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.8.0",
+    "exec": "^0.2.1",
+    "fs-extra": "^11.2.0",
+    "package-name": "^0.1.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^22.4.1",
+    "@vitejs/plugin-vue": "latest",
+    "@vue/tsconfig": "^0.5.1",
+    "concurrently": "^8.2.2",
+    "electron": "^31.4.0",
+    "electron-builder": "^24.13.3",
+    "npm-run-all2": "^6.2.0",
+    "sass-embedded": "^1.77.8",
+    "typescript": "~5.4.0",
+    "vite": "latest",
+    "vue-tsc": "^2.0.21"
+  },
+  "build": {
+    "appId": "your.id",
+    "productName": "Electron + Vue3 开发桌面应用",
+    "copyright": "Copyright © year ${author}",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "output": "app_client"
+    },
+    "mac": {
+      "category": "public.app-category.music",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
